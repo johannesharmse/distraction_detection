@@ -47,11 +47,11 @@ while True:
             for (ex,ey,ew,eh) in eyes:
                 cv.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),border_w)
                 j += 1
-                if j%10 == 0:
+                if j%2 == 0:
                     i += 1
                     filename = '../data/eye'+str(i)+'.jpg'
                     print(filename)
-                    
+
                     cv.imwrite(filename, roi_color[ey+border_w:ey+eh-border_w, ex+border_w:ex+ew-border_w])
 
     cv.imshow('Watcha Looking At?', frameClone)
