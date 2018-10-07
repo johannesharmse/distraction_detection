@@ -57,11 +57,19 @@ while True:
                 # print(roi)
 
                 prediction = distract_model.predict(roi)
-                print(prediction)
-                probs.append(np.max(prediction))
-                label.append(prediction_classes[prediction.argmax()])
+                # print(prediction)
+                probs.append(prediction[0])
+                # label.append(prediction_classes[prediction.argmax()])
 
             probs_mean = np.mean(probs)
+
+            if probs_mean <= 0.5:
+                label = 'distracted'
+            else:
+                label = 'focussed'
+
+            cv.putText(frameClone,label,(x,y-5), cv.FONT_HERSHEY_SIMPLEX, 
+            1, (0,0,255), 3, cv.LINE_AA)
             # print(prediction)
             # print(label)
 
