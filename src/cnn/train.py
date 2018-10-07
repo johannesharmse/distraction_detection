@@ -1,6 +1,8 @@
 # data augmenting / preprocessing
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 
+# from tensorflow.python.client import device_lib
+
 # model architecture and training
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
@@ -109,6 +111,7 @@ def data_prep(train_dir, validate_dir, batch_size=16):
 
 if __name__ == "__main__":
     batch_size = 16
+    # print(device_lib.list_local_devices())
     model = graph()
     train_generator, validation_generator = data_prep(train_dir='../../data/train', validate_dir='../../data/validate', batch_size=batch_size)
     model.fit_generator(
@@ -117,3 +120,5 @@ if __name__ == "__main__":
         epochs=4,
         validation_data=validation_generator,
         validation_steps=800 // batch_size)
+    # save model
+    model.save('distraction_model.hdf5')
