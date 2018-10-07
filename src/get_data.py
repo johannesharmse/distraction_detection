@@ -51,6 +51,7 @@ while True:
                     i += 1
                     filename = '../data/eye'+str(i)+'.jpg'
                     print(filename)
+                    
                     cv.imwrite(filename, roi_color[ey+border_w:ey+eh-border_w, ex+border_w:ex+ew-border_w])
 
     cv.imshow('Watcha Looking At?', frameClone)
