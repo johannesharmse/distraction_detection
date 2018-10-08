@@ -43,12 +43,12 @@ while True:
         faces = face_cascade.detectMultiScale(gray,scaleFactor=scale_factor,minNeighbors=min_neighbours,minSize=(min_size_w,min_size_h),flags=cv2.CASCADE_SCALE_IMAGE)
         
         if len(faces) > 0:
-            frameClone = frame.copy()
+            # frameClone = frame.copy()
 
             for (x,y,w,h) in faces:
-                cv2.rectangle(frameClone,(x,y),(x+w,y+h),(255,0,0),2)
+                cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
                 roi_gray = gray[y:y+h, x:x+w]
-                roi_color = frameClone[y:y+h, x:x+w]
+                roi_color = frame[y:y+h, x:x+w]
                 eyes = eye_cascade.detectMultiScale(roi_gray, scaleFactor=scale_factor,minNeighbors=min_neighbours,minSize=(min_size_w_eye,min_size_w_eye))
 
                 probs = list()
@@ -77,17 +77,13 @@ while True:
                 else:
                     label = 'focused'
 
-                cv2.putText(frameClone,label,(x,y-5), cv2.FONT_HERSHEY_SIMPLEX, 
+                cv2.putText(frame,label,(x,y-5), cv2.FONT_HERSHEY_SIMPLEX, 
                 1, (0,0,255), 3, cv2.LINE_AA)
-                # print(prediction)
-                # print(label)
         
         # Write the frame into the file 'output.avi'
-        video_out.write(frameClone)
+        video_out.write(frame)
 
-        print(frameClone.shape)
-
-        cv2.imshow('Watcha Looking At?', frameClone)
+        cv2.imshow('Watcha Looking At?', frame)
 
         
 
