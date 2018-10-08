@@ -19,7 +19,6 @@ min_size_h_eye = 60
 scale_factor = 1.1
 min_neighbours = 5
 
-
 # image iterators
 # i = image filename number
 # j = controls how often images should be saved
